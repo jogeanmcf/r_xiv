@@ -14,9 +14,9 @@ class PDFViewerPage extends StatefulWidget {
 }
 
 class _PDFViewerPageState extends State<PDFViewerPage> {
-  String directoryPath;
-  String filePath;
-  bool isLoaded;
+  late String directoryPath;
+  String? filePath;
+  late bool isLoaded;
 
   @override
   void initState() {

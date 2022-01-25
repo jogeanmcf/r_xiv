@@ -5,7 +5,7 @@ import 'package:xml/xml.dart';
 //Melhorar o código... ao invez de escrever cada entrada nós
 // vamos fazer um factory dentro objeto SearchResult
 // e criar o objeto com mto menos código
-Future<SearchResult> listOfArticlesFromArxiv(String searchResultQuerry,
+Future<SearchResult> listOfArticlesFromArxiv(String? searchResultQuerry,
     [int start = 0]) async {
   // parameters of the searchResult
   Map<String, dynamic> parameters = {

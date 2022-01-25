@@ -15,7 +15,7 @@ class ArticleCard extends StatefulWidget {
 }
 
 class _ArticleCardState extends State<ArticleCard> {
-  ExpandableController controller;
+  ExpandableController? controller;
   @override
   Widget build(BuildContext context) {
     final internetConnection = Provider.of<ConnectivityResult>(context);
@@ -87,14 +87,14 @@ class _ArticleCardState extends State<ArticleCard> {
 
   Widget header(Article article) {
     String _authors = '';
-    article.authors.forEach((element) {
+    article.authors!.forEach((element) {
       _authors = _authors + element;
     });
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          article.title.replaceAll('\n', ''),
+          article.title!.replaceAll('\n', ''),
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
         ),
         SizedBox(height: 8),
@@ -110,7 +110,7 @@ class _ArticleCardState extends State<ArticleCard> {
 
   Widget colapsed(Article article) {
     return Text(
-      article.summary,
+      article.summary!,
       maxLines: 3,
       overflow: TextOverflow.fade,
       textAlign: TextAlign.justify,
@@ -119,11 +119,11 @@ class _ArticleCardState extends State<ArticleCard> {
 
   Widget expanded(Article article) {
     return Container(
-      child: Text(article.summary.replaceAll('\n', '')),
+      child: Text(article.summary!.replaceAll('\n', '')),
     );
   }
 
   void share(Article article) {
-    Share.share('Check out this article in ' + article.id);
+    Share.share('Check out this article in ' + article.id!);
   }
 }

@@ -5,7 +5,7 @@ import 'package:r_xiv/contants.dart';
 import 'package:r_xiv/pages/result_page.dart';
 
 class SearchField extends StatelessWidget {
-  final String text;
+  final String? text;
   SearchField({this.text});
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class SearchField extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) => ResultPage(
-                                key: Key(_search.text),
+                                key: Key(_search.text!),
                               )));
                 }
               },

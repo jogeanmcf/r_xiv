@@ -9,7 +9,7 @@ import 'package:r_xiv/widgets/search_field.dart';
 import 'package:r_xiv/services/backend.dart';
 
 class ResultPage extends StatelessWidget {
-  final Key key;
+  final Key? key;
   ResultPage({this.key});
   @override
   Widget build(BuildContext context) {
@@ -80,11 +80,11 @@ class ListOfArticles extends StatelessWidget {
 }
 
 class NavButtons extends StatelessWidget {
-  final int totalResults;
+  final int? totalResults;
   // final int atualPage;
-  final int searchIndex;
-  final Function previousPage;
-  final Function nextPage;
+  final int? searchIndex;
+  final Function? previousPage;
+  final Function? nextPage;
 
   NavButtons(
       {this.totalResults, this.searchIndex, this.nextPage, this.previousPage});
@@ -94,14 +94,14 @@ class NavButtons extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        goButtons('<<< Previous', previousPage, searchIndex > 0 ? true : false),
+        goButtons('<<< Previous', previousPage, searchIndex! > 0 ? true : false),
         goButtons('Next >>>', nextPage,
-            10 * (searchIndex + 1) < totalResults ~/ 10 ? true : false),
+            10 * (searchIndex! + 1) < totalResults! ~/ 10 ? true : false),
       ],
     );
   }
 
-  Widget goButtons(String text, Function onPressed, bool visible) {
+  Widget goButtons(String text, Function? onPressed, bool visible) {
     return Container(
       width: 130,
       margin: EdgeInsets.all(10),
@@ -119,7 +119,7 @@ class NavButtons extends StatelessWidget {
               style: TextStyle(color: Colors.black),
             ),
           ),
-          onPressed: onPressed,
+          onPressed: onPressed as void Function()?,
         ),
       ),
     );
@@ -128,16 +128,16 @@ class NavButtons extends StatelessWidget {
 
 class Search with ChangeNotifier {
   int _searchIndex = 0;
-  int totalResults = 0;
+  int? totalResults = 0;
   int page = 0;
-  String text;
+  String? text;
   bool isLoaded = false;
   List<Article> _listOfArticles = [];
   List<Article> listOfArticles = [];
 
   void getArticlesFromArxiv() {
     listOfArticlesFromArxiv(text, 10 * _searchIndex).then((result) {
-      result.listOfArticles.forEach((element) => _listOfArticles.add(element));
+      result.listOfArticles!.forEach((element) => _listOfArticles.add(element));
       totalResults = result.totalResults;
       contructLit();
     });
