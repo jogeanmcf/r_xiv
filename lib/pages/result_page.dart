@@ -1,12 +1,10 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:r_xiv/widgets/article_card.dart';
-import 'package:r_xiv/models/article.dart';
 import 'package:r_xiv/widgets/loading_widget.dart';
 import 'package:r_xiv/widgets/search_field.dart';
-import 'package:r_xiv/services/backend.dart';
+import 'package:r_xiv/controllers/search_controller.dart';
 
 class ResultPage extends StatelessWidget {
   final Key? key;
@@ -94,7 +92,8 @@ class NavButtons extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        goButtons('<<< Previous', previousPage, searchIndex! > 0 ? true : false),
+        goButtons(
+            '<<< Previous', previousPage, searchIndex! > 0 ? true : false),
         goButtons('Next >>>', nextPage,
             10 * (searchIndex! + 1) < totalResults! ~/ 10 ? true : false),
       ],
@@ -123,75 +122,5 @@ class NavButtons extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class Search with ChangeNotifier {
-  int _searchIndex = 0;
-  int? totalResults = 0;
-  int page = 0;
-  String? text;
-  bool isLoaded = false;
-  List<Article> _listOfArticles = [];
-  List<Article> listOfArticles = [];
-
-  void getArticlesFromArxiv() {
-    listOfArticlesFromArxiv(text, 10 * _searchIndex).then((result) {
-      result.listOfArticles!.forEach((element) => _listOfArticles.add(element));
-      totalResults = result.totalResults;
-      contructLit();
-    });
-  }
-
-  void contructLit() {
-    listOfArticles.clear();
-    int i = page * 10;
-    // we have to improve this loop -> it is giving the wrong answer
-    while (i < _listOfArticles.length && i < page * 10 + 10) {
-      listOfArticles.add(_listOfArticles[i]);
-      i++;
-    }
-    isLoaded = true;
-    notifyListeners();
-  }
-
-  set setText(String theText) {
-    listOfArticles.clear();
-    text = theText;
-    notifyListeners();
-  }
-
-  int get searchIndex => _searchIndex;
-
-  void reset() {
-    isLoaded = false;
-    _searchIndex = 0;
-    page = 0;
-    _listOfArticles = [];
-  }
-
-  void nextSerchIndex() {
-    _searchIndex++;
-  }
-
-  void nextPage() {
-    isLoaded = false;
-    notifyListeners();
-    page++;
-    if (page > _searchIndex) {
-      nextSerchIndex();
-      getArticlesFromArxiv();
-    } else {
-      contructLit();
-    }
-  }
-
-  void previousPage() {
-    if (page > 0) {
-      isLoaded = false;
-      notifyListeners();
-      page--;
-      contructLit();
-    }
   }
 }

@@ -2,12 +2,13 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:r_xiv/widgets/search_field.dart';
+import 'package:r_xiv/controllers/theme_controller.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final internetConnection = Provider.of<ConnectivityResult>(context);
-    // final _search = Provider.of<Search>(context);
+    final themeController = Provider.of<ThemeController>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0),
@@ -24,6 +25,11 @@ class HomePage extends StatelessWidget {
                   : SizedBox(height: 30),
               SizedBox(height: 280),
             ]),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          themeController.setDeviceTheme();
+        },
       ),
     );
   }

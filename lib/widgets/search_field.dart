@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:r_xiv/contants.dart';
 import 'package:r_xiv/pages/result_page.dart';
+import 'package:r_xiv/controllers/search_controller.dart';
 
 class SearchField extends StatelessWidget {
   final String? text;

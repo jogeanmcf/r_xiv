@@ -29,7 +29,7 @@ dependencies:
   shimmer: ^2.0.0
   connectivity_plus: ^1.0.1
   expandable: ^5.0.1
-  flutter_pdfview: ^1.1.0
+  # flutter_pdfview: ^1.1.0
   share_plus: ^2.1.0
   # flutter_math: ^0.3.0-nullsafety.1 # this package is in conflict with other ones
   # flutter_tex: ^4.0.0 # There is a lot of problems ans users permisions 
