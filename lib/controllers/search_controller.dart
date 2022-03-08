@@ -2,12 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:r_xiv/models/article.dart';
 import 'package:r_xiv/services/backend.dart';
 
-class Search with ChangeNotifier {
+enum SortBy {
+  submitedAt,
+  relevance,
+  lastUpdate,
+}
+
+class SearchController with ChangeNotifier {
   int _searchIndex = 0;
   int? totalResults = 0;
   int page = 0;
   String? text;
   bool isLoaded = false;
+  List<String> searchOption = ['relevance', 'last update', 'submited at'];
   List<Article> _listOfArticles = [];
   List<Article> listOfArticles = [];
 
@@ -69,5 +76,15 @@ class Search with ChangeNotifier {
       page--;
       constructLit();
     }
+  }
+
+  Enum _sortBy = SortBy.relevance;
+
+  Enum get sortBy => _sortBy;
+
+  set sortBy(Enum userChoice) {
+    _sortBy = userChoice;
+
+    notifyListeners();
   }
 }

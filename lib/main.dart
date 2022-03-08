@@ -13,7 +13,7 @@ void main() {
         create: (context) => Connectivity().onConnectivityChanged,
         initialData: ConnectivityResult.none,
       ),
-      ChangeNotifierProvider(create: (_) => Search()),
+      ChangeNotifierProvider(create: (_) => SearchController()),
       ChangeNotifierProvider(create: (_) => ThemeController())
     ],
     child: RXivApp(),

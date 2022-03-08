@@ -5,6 +5,7 @@ import 'package:r_xiv/widgets/article_card.dart';
 import 'package:r_xiv/widgets/loading_widget.dart';
 import 'package:r_xiv/widgets/search_field.dart';
 import 'package:r_xiv/controllers/search_controller.dart';
+import 'package:r_xiv/widgets/search_options.dart';
 
 class ResultPage extends StatelessWidget {
   final Key? key;
@@ -13,15 +14,14 @@ class ResultPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          toolbarHeight: 70.0,
-          automaticallyImplyLeading: false,
+          // toolbarHeight: 60.0,
+          // automaticallyImplyLeading: false,
           centerTitle: true,
           title: Container(
             margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
             child: SearchField(),
           ),
         ),
-        backgroundColor: Colors.white70,
         body: ListOfArticles());
   }
 }
@@ -34,12 +34,13 @@ class ListOfArticles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _search = Provider.of<Search>(context);
+    final _search = Provider.of<SearchController>(context);
     final connection = Provider.of<ConnectivityResult>(context);
     return !_search.isLoaded
         ? LoadingResult()
         : ListView(
             children: [
+              SearchOptions(),
               ListView.builder(
                   physics: ScrollPhysics(),
                   shrinkWrap: true,

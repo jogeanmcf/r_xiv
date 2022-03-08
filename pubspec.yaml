@@ -23,14 +23,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  provider: ^5.0.0
-  http: ^0.13.3
-  path_provider: ^2.0.1
+  provider: ^6.0.2
+  http: ^0.13.4
+  path_provider: ^2.0.9
   shimmer: ^2.0.0
-  connectivity_plus: ^1.0.1
+  connectivity_plus: ^2.2.0
   expandable: ^5.0.1
   # flutter_pdfview: ^1.1.0
-  share_plus: ^2.1.0
+  share_plus: ^3.0.4
   # flutter_math: ^0.3.0-nullsafety.1 # this package is in conflict with other ones
   # flutter_tex: ^4.0.0 # There is a lot of problems ans users permisions 
   # catex: ^0.0.1+8 # good to render equation, not texts
